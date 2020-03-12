@@ -157,5 +157,62 @@ namespace EfDemo.Persistence.Test
         Assert.AreEqual("6ABIF_6AKIF", schoolClass.Name);
       }
     }
-  }
+    /*[TestMethod]
+    public async Task ApplicationDbContext_DeleteStudentFromClass_ShouldReturnUpdatedSchoolClasses()
+    {
+        string dbName = Guid.NewGuid().ToString();
+
+        using (ApplicationDbContext dbContext = GetDbContext(dbName))
+        {
+                SchoolClass schoolClass = new SchoolClass
+                {
+                    Name = "6ABIF_6AKIF",
+                    Pupils = new List<Pupil>
+                    {
+                        new Pupil
+                        {
+                            FirstName = "Max",
+                            LastName = "Mustermann",
+                            BirthDate = DateTime.Parse("1.1.1990")
+                        },
+                        new Pupil
+                        {
+                            FirstName = "Eva",
+                            LastName = "Musterfrau",
+                            BirthDate = DateTime.Parse("1.1.1991")
+                        },
+                        new Pupil
+                        {
+                            FirstName = "Fritz",
+                            LastName = "Musterkind",
+                            BirthDate = DateTime.Parse("1.1.1980")
+                        },
+                        new Pupil
+                        {
+                            FirstName = "Franz", LastName = "Huber", BirthDate = DateTime.Parse("10.7.1999")
+                        }
+                    }
+                };
+                dbContext.SchoolClasses.Add(schoolClass);
+                await dbContext.SaveChangesAsync();
+                Assert.AreNotEqual(0, schoolClass.Id);
+
+            }
+
+        using (ApplicationDbContext deleteContext = GetDbContext(dbName))
+        {
+            Pupil pupil = await deleteContext.Pupils.SingleAsync(p => p.FirstName == "Max");
+            deleteContext.Pupils.Remove(pupil);
+            deleteContext.SaveChanges();
+        }
+
+        using (ApplicationDbContext verifyContext = GetDbContext(dbName))
+        {
+            Assert.AreEqual(1, await verifyContext.Pupils.CountAsync());
+            var pupil = await verifyContext.Pupils.FirstAsync();
+            Assert.AreEqual("Max", pupil.FirstName);
+        }
+    }
+    */
+    }
 }
